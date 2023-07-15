@@ -13,8 +13,8 @@ def main():
 
 
 def qtmain():
-    from PyQt4 import QtGui, QtCore
-    class Example(QtGui.QWidget):
+    from PyQt5 import QtGui, QtCore, QtWidgets
+    class Example(QtWidgets.QWidget):
 
         def __init__(self):
             super(Example, self).__init__()
@@ -24,14 +24,14 @@ def qtmain():
 
         def initUI(self):
 
-            self.btn = QtGui.QPushButton('OK', self)
+            self.btn = QtWidgets.QPushButton('OK', self)
             self.btn.move(20, 20)
             self.btn.clicked.connect(self.showDialog)
 
-            self.le = QtGui.QLineEdit(self)
+            self.le = QtWidgets.QLineEdit(self)
             self.le.move(130, 22)
 
-            self.fdBtn = QtGui.QPushButton('Choose', self)
+            self.fdBtn = QtWidgets.QPushButton('Choose', self)
             self.fdBtn.move(280, 20)
             self.fdBtn.clicked.connect(self.chooseFile)
 
@@ -40,7 +40,7 @@ def qtmain():
             self.show()
 
         def chooseFile(self):
-            sFileName = QtGui.QFileDialog.getOpenFileName(self, "Open File", "","Files (*.*)" )
+            sFileName, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "","Files (*.*)" )
             if not sFileName: return
             self.le.setText("file:///"+sFileName)
             self.showDialog()
@@ -51,7 +51,7 @@ def qtmain():
             fileUrl = text
             QtCore.QCoreApplication.instance().quit()
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     ex = Example()
     ret = app.exec_()
     return ret

@@ -11,7 +11,9 @@ from traceback import print_exc
 
 import numpy
 import PIL.Image as Image
-import urllib, cStringIO
+import urllib.request
+
+from io import BytesIO
 
 from vector import Vector
 
@@ -59,7 +61,7 @@ class Renderer(object):
         if os.path.isfile(filename):
             file = "file://{0}".format(os.path.abspath(filename))
         else:
-            file = cStringIO.StringIO(urllib.urlopen(filename).read())
+            file = BytesIO(urllib.request.urlopen(filename).read())
         im = Image.open(file)
 
         im.thumbnail((8192, 4096))
